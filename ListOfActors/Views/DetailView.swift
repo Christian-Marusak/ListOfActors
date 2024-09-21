@@ -6,12 +6,10 @@
 //
 
 import SwiftUI
-import SwiftUI
 
 struct DetailView: View {
     let actor: Actor
-    @State private var bgColor = Color.white
-    
+    @State private var bgColor = Color.default
     var body: some View {
         VStack{
             VStack(alignment: .center, spacing: 20) {

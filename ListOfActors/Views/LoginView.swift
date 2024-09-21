@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SwiftUI
 
 struct LoginView: View {
     @StateObject var viewModel = LoginViewModel()
@@ -17,6 +16,14 @@ struct LoginView: View {
                 MasterView()
             } else {
                 VStack {
+                    Image(.loginView)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 300, height:300)
+                    Text("Find your favorite actor")
+                        .font(.largeTitle)
+                        .bold()
+
                     TextField("Username", text: $viewModel.username)
                         .padding()
                         .background(Color.gray.opacity(0.2))
@@ -26,11 +33,9 @@ struct LoginView: View {
                         .padding()
                         .background(Color.gray.opacity(0.2))
                         .cornerRadius(5)
-                    
                     if viewModel.isLoading {
                         ProgressView()
                     }
-                    
                     Button(action: viewModel.login) {
                         Text("Login")
                             .frame(minWidth: 100, maxWidth: .infinity)
@@ -42,6 +47,7 @@ struct LoginView: View {
                     .padding(.top, 20)
                 }
                 .padding()
+                Spacer()
             }
         }
     }

@@ -10,6 +10,11 @@ import SwiftUI
 
 class ActorsViewModel: ObservableObject {
     @Published var actors: [Actor] = []
+    @Published var isLoggedIn: Bool = true
+    
+    func toggleLoggedIn() {
+        isLoggedIn.toggle()
+    }
     
     func fetchActors() {
         guard let url = URL(string: "https://restservice.infotech.sk/Service.svc/getData") else {
@@ -36,7 +41,6 @@ class ActorsViewModel: ObservableObject {
             }
             
             do {
-                // The API response has an "actors" array as the root key
                 let decodedResponse = try JSONDecoder().decode(ActorResponse.self, from: data)
                 DispatchQueue.main.async {
                     self.actors = decodedResponse.actors
@@ -48,7 +52,6 @@ class ActorsViewModel: ObservableObject {
     }
 }
 
-// Response structure to match the API
 struct ActorResponse: Codable {
     let actors: [Actor]
 }
