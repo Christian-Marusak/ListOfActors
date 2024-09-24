@@ -7,10 +7,12 @@
 import SwiftUI
 import os
 struct MasterView: View {
+    // premenná typu StateObject ktorá obsahuje všetku logiku tohoto view
     @StateObject var viewModel = ActorsViewModel()
     
     var body: some View {
         NavigationView {
+            // Ak je užívateľa prihlásený zobrazi List s hercami, ak nie zobrazí LoginView
             if viewModel.isLoggedIn {
                 List(viewModel.actors) { actor in
                     NavigationLink(destination: DetailView(actor: actor)) {
@@ -32,7 +34,9 @@ struct MasterView: View {
                     }
                 }
                 .onAppear(perform: {
-                    os.Logger().error("printing out UserDefaults \(UserDefaults.standard.dictionaryRepresentation())")})
+                    //Vypísanie UserDefault, kontrolný logger ktorý mi vypísal UserDefault aby som skontroloval správne uloženie mena a hesla, akonáhle nebol potrebný zakomentoval som ho aby nebola konzola zbytočne zanesená nepotrebnými iformáciami
+                    //                    Logger().error("printing out UserDefaults \(UserDefaults.standard.dictionaryRepresentation())")
+                })
                 .onAppear(perform: viewModel.fetchActors)
                 .navigationTitle("Actors")
                 .navigationBarItems(trailing: Button(action: viewModel.toggleLoggedIn , label: {

@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct LoginView: View {
+    //Premenná typu StateObject ktorá obsahuje viewModel na celu logiku tohoto View
     @StateObject var viewModel = LoginViewModel()
     
     var body: some View {
         VStack {
+            //Kontrola či je užívateľ prihlásený, ak hej ukáže MasterView ak nie vráti VStack s komponentami
             if viewModel.isLoggedIn {
                 MasterView()
             } else {
@@ -23,7 +25,7 @@ struct LoginView: View {
                     Text("Find your favorite actor")
                         .font(.largeTitle)
                         .bold()
-
+                    
                     TextField("Username", text: $viewModel.username)
                         .padding()
                         .background(Color.gray.opacity(0.2))
@@ -36,6 +38,7 @@ struct LoginView: View {
                     if viewModel.isLoading {
                         ProgressView()
                     }
+                    //Tlačidlo na prihlásenie
                     Button(action: viewModel.login) {
                         Text("Login")
                             .frame(minWidth: 100, maxWidth: .infinity)

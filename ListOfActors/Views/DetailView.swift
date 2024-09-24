@@ -8,9 +8,13 @@
 import SwiftUI
 
 struct DetailView: View {
+    // Načítanie modelu Actor
     let actor: Actor
+    // premenná typu State ktorá kontroluje zmenu farieb, defaultne je nastavená na farbu Default kôli Dark a Light modu iPhonu
     @State private var bgColor = Color.default
     var body: some View {
+        
+        // Zobrazenie
         VStack{
             VStack(alignment: .center, spacing: 20) {
                 AsyncImage(url: URL(string: actor.image)) { image in
@@ -22,6 +26,7 @@ struct DetailView: View {
                 .frame(height: 300)
             }
             .padding()
+            // zobrazenie informácií o hercovi v VStacku v ktorom sú Hstacky aby sa dalo zobraziť časť textu boldom a časť light fontom
             VStack(alignment: .leading, content: {
                 HStack {
                     Text("Name:")
@@ -70,13 +75,15 @@ struct DetailView: View {
                 }
             })
             .padding()
-                Spacer()
+            Spacer()
         }
         .background(bgColor)
+        // Zmena farby pozadia podľa bgColor
         .navigationBarItems(trailing: Button("Change BG", action: changeBGColor))
     }
     
     func changeBGColor() {
+        //Funkcia na zmenu farby pozadia
         bgColor = Color(
             red: .random(in: 0...1),
             green: .random(in: 0...1),
@@ -86,5 +93,6 @@ struct DetailView: View {
 }
 
 #Preview {
+    //Preview s modelovými dátami
     DetailView(actor: Actor(name: "Actor", description: "Actors description", image: "https://upload.wikimedia.org/wikipedia/commons/1/1c/Kaley_Cuoco_at_PaleyFest_2013.jpg", children: "Actors children", country: "Actors country", dob: "Actors dob", gender: "Actors gender", height: "Actors height", spouse: "Actors spouse", wiki: "Actors wiki"))
 }

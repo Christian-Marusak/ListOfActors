@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+//Model dáta ktoré príjmam z API, štruktúra s názvom Actor
 struct Actor: Codable, Identifiable {
     let id = UUID()
     let name: String
